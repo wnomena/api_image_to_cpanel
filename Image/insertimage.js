@@ -1,15 +1,11 @@
-const fs = require("node:fs")
-const path = require("node:path")
- 
-const InsertImage = function (req,res) {
-    const filename = req.file ? req.file.filename : undefined
-    const name = req.params.name
+
+module.exports = async function(req,res) {
+    const filename = req.files
+    console.log(req.files)
     if(!filename) {
-        return res.status(400).json({message : "There are any image in this request, please verify you connexion or all inpuut and try again"})        
+        return res.status(400).json({message : "Something went wrong, try later !"})        
     } else {
-        return res.json({message : "Image added successfully"})
+        console.log("mande")
+        return res.json({message : "Image added successfully", list : [...filename.map(file => file.filename)]})
     }
-}
-module.exports = {
-    InsertImage : InsertImage
 }
