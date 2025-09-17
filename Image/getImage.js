@@ -6,7 +6,6 @@ module.exports = function (req,res)  {
     console.log(ImageLink)
     if(fs.existsSync(ImageLink)) {
         try {
-            console.log("mande")
             return res.sendFile(ImageLink)
         } catch (error) {
             return res.status(400).json({message: "Image not found"})

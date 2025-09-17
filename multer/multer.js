@@ -5,9 +5,12 @@ const storage = multer.diskStorage({
         cb(null,"./file")
     },
     filename : function(req,file,cb) {
-        const name = date.getTime() + "-" + file.originalname.split(" ").join("-")
+        console.log(file)
+        const name = date.getTime() + "-"+ file.fieldname + "-" + file.originalname.split(" ").join("-")
         cb(null,name)
     }
 })
 
-module.exports = multer({storage: storage}).array("image")
+module.exports = {
+    presentation_image : multer({storage: storage}).array("image"),
+} 
