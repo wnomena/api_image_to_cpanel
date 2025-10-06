@@ -5,7 +5,7 @@ const GetImage  = require("./Image/getImage")
 const upload = require("./multer/multer")
 const UnlinkImage  = require("./Image/deleteImage")
 const multer = require("multer")
-const port = 8080
+const port = 8080 | process.env.PORT
 const app = express()
 app.use(cors())
 app.use(function (req,res,next) {
