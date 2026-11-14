@@ -5,8 +5,18 @@ const storage = multer.diskStorage({
         cb(null,"./file")
     },
     filename : function(req,file,cb) {
-        const name = date.getTime() + "-" + file.originalname.split(" ").join("-")
-        cb(null,name)
+        const file_extention = file.originalname.split(".").pop()
+        console.log(file_extention)
+
+        const name = file.originalname
+                            .normalize("NFD")
+                            .replace(/[\u0300-\u036f]/g, "")
+                            .trim()
+                            .replace(/\s+/g, "_")
+                            .replace(/[^a-zA-Z0-9_]/g, "")
+                            .replace(/^_+|_+$/g, "")
+        const filename_will =name.split(file_extention.toString())[0] + "." + file_extention
+        cb(null,filename_will)
     }
 })
 
